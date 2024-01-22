@@ -1,5 +1,5 @@
 #!/usr/bin/node
-//script that writes a string to a file.
+// script that writes a string to a file.
 
 const argvs = process.argv.slice(2);
 const filename = argvs[0];
