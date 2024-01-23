@@ -11,24 +11,20 @@ request(url, function (error, response, body) {
   const content = JSON.parse(body);
   const users = [];
   content.forEach(item => {
-    if (users.includes(item.userId) !== true) {
+    if (!users.includes(item.userId)) {
       users.push(item.userId);
     }
   });
   let result = {};
-  let check = 0;
   users.forEach(item => {
     let counter = 0;
     content.forEach(element => {
       if (item === element.userId && element.completed === true) {
         counter += 1;
-        check = 1;
       }
     });
-    if (check === 1) {
+    if (counter > 0) {
       result[item] = counter;
-    } else {
-      result = {};
     }
   });
   console.log(result);
