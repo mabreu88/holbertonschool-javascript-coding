@@ -20,16 +20,21 @@ const app = http.createServer(async (req, res) => {
     res.write('This is the list of our students\n');
     try {
       const students = await countStudents(DATABASE);
+      const numStudents = students.length;
+      res.write(`Number of students: ${numStudents}\n`);
       res.end(`${students.join('\n')}`);
     } catch (error) {
       res.end(error.message);
     }
+    return;
   }
+  
   res.statusCode = 404;
   res.end();
 });
 
 app.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
 });
 
 module.exports = app;
